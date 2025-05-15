@@ -1,3 +1,3 @@
 # phonebook_backend
 
-URL: https://phonebook-backend-w7ro.onrender.com
+Backend: https://phonebook-backend-w7ro.onrender.com/api/persons
