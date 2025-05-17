@@ -17,7 +17,7 @@ MongoDB
 <br>
 
 <h2>Dependiencies:</h2>
-<b>cors:</b> resolve cross origin issue
+<b>cors:</b> resolve cross origin issue (no need anymore since this is a single page)
 <br>
 <b>dotenv:</b> set up environment variable for sensitive info such as database connection string and application port number
 <br>
