@@ -17,8 +17,12 @@ MongoDB
 <br>
 
 <h2>Dependiencies:</h2>
-cors: resolve cross origin issus
-dotenv: set up environment variable for sensitive info such as database connection string and application port number
-express: set up routes of RESTful API in backend
-mongoose: connect database and initialize schema and model for interacting with DB
-morgan: print out logs in console
+<b>cors:</b> resolve cross origin issus
+<br>
+<b>dotenv:</b> set up environment variable for sensitive info such as database connection string and application port number
+<br>
+<b>express:</b> set up routes of RESTful API in backend
+<br>
+<b>mongoose:</b> connect database and initialize schema and model for interacting with DB
+<br>
+<b>morgan:</b> print out logs in console
