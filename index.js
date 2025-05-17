@@ -12,54 +12,55 @@ app.use(express.json())
 // app.use(morgan('tiny'))
 // app.use(cors())
 // new token must return a string
-morgan.token('req-body', (request, response) => {
+morgan.token('req-body', (request) => {
   if (request.method === 'POST')
     return JSON.stringify(request.body)
   else
-    return ""
+    return ''
 })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :req-body'))
 app.use(express.static('dist'))
 
-let persons = [
-    { 
-      "id": "1",
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": "2",
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": "3",
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": "4",
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-]
+// let persons = [
+//     { 
+//       "id": "1",
+//       "name": "Arto Hellas", 
+//       "number": "040-123456"
+//     },
+//     { 
+//       "id": "2",
+//       "name": "Ada Lovelace", 
+//       "number": "39-44-5323523"
+//     },
+//     { 
+//       "id": "3",
+//       "name": "Dan Abramov", 
+//       "number": "12-43-234345"
+//     },
+//     { 
+//       "id": "4",
+//       "name": "Mary Poppendieck", 
+//       "number": "39-23-6423122"
+//     }
+// ]
 
 app.get('/api/persons', (request, response, next) => {
-    Person.find({}).then(persons => {
-      response.json(persons)
-    })
+  Person.find({}).then(persons => {
+    response.json(persons)
+  })
     .catch(error => next(error))
 })
 
-app.get('/info', (request, response) => {
-  const now = new Date()
-  const fullDateAndTime = now.toString()
-
-  const personCount = persons.length
-  // "send" can only do once
-  response.send(`<div>Phonebook has info for ${personCount} people</div>
-                 <div>${fullDateAndTime}</div>
-                `)
+app.get('/info', (request, response, next) => {
+  Person.countDocuments({})
+    .then(count => {
+      const now = new Date()
+      response.send(`
+        <div>Phonebook has info for ${count} people</div>
+        <div>${now}</div>
+      `)
+    })
+    .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -82,12 +83,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-function getRandomIntInclusive(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-}
-
 
 app.post('/api/persons', (request, response, next) => {
   // console.log(request.body);
@@ -98,12 +93,12 @@ app.post('/api/persons', (request, response, next) => {
   if (!body.name)
     return response.status(400).json({
       error: 'name is missing'
-  })
+    })
   // number is not provided
   else if (!body.number)
     return response.status(400).json({
       error: 'number is missing'
-  })
+    })
   // name exists
   // else if (persons.some(person => person.name === body.name))
   //   return response.status(400).json({
