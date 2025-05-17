@@ -1,9 +1,10 @@
 # phonebook Full Stack!!!
 <h1>This is a single page application with frontend and backend using the same origin</h1>
 
-<h2>Backend:</h2> 
-https://phonebook-backend-w7ro.onrender.com/api/persons
-
+<h2>Backend: (RESTful API)</h2> 
+https://phonebook-backend-w7ro.onrender.com/api/persons (retrieving all persons)
+<br>
+https://phonebook-backend-w7ro.onrender.com/api/persons/6826c04d29d4223bc870ba11 (getting one person with id in the path)
 <br>
 
 <h2>Frontend:</h2>
